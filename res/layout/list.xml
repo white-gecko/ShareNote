@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" >
+    <Button android:layout_width="fill_parent"
+  android:layout_height="wrap_content" android:id="@+id/newNote" android:text="@string/newNote" android:layout_alignParentBottom="true"/>
+    <ListView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@android:id/list" android:layout_alignParentTop="true" android:layout_above="@+id/newNote"></ListView>
+</RelativeLayout>
