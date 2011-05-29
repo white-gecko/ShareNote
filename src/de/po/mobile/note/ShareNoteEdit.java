@@ -81,32 +81,50 @@ public class ShareNoteEdit extends Activity {
 	}
 
 	private void _processIntent() {
-		EditText text = (EditText) findViewById(R.id.noteText);
+		EditText textView = (EditText) findViewById(R.id.noteText);
 		NoteMapper nm = ((ShareNoteApp) getApplication()).getNoteMapper();
-		getIntent().hasExtra("uid");
+		// getIntent().hasExtra("uid");
 
-		if (getIntent().hasExtra("dbid")) {
-			long id = getIntent().getLongExtra("dbid", -1);
-			if (id > 0) {
-				note = nm.getNote(id);
+		Intent intent = getIntent();
+		String action = intent.getAction();
+		String content = "";
+
+		if (action != null && action.equals(android.content.Intent.ACTION_SEND)) {
+			String title = intent
+					.getStringExtra(android.content.Intent.EXTRA_TITLE);
+			String text = intent
+					.getStringExtra(android.content.Intent.EXTRA_TEXT);
+			if (title != null) {
+				content += title;
 			}
-		} else if (getIntent().hasExtra("uid")) {
-			String uId = getIntent().getStringExtra("uid");
-			if (uId != null) {
-				note = nm.getNote(uId);
+			if (textView != null) {
+				content += text;
+			}
+		} else {
+			// action should be de.po.mobile.note.openNote
+			if (intent.hasExtra("dbid")) {
+				long id = intent.getLongExtra("dbid", -1);
+				if (id > 0) {
+					note = nm.getNote(id);
+				}
+			} else if (intent.hasExtra("uid")) {
+				String uId = intent.getStringExtra("uid");
+				if (uId != null) {
+					note = nm.getNote(uId);
+				}
 			}
 		}
 
 		if (note != null) {
-			text.setText(note.getContent());
+			textView.setText(note.getContent());
 		} else {
-			text.setText("");
+			textView.setText(content);
 		}
 
 	}
-	
+
 	private void deleteNote(String uid) {
-		NoteMapper nm = ((ShareNoteApp)getApplication()).getNoteMapper();
+		NoteMapper nm = ((ShareNoteApp) getApplication()).getNoteMapper();
 		Note note = nm.getNote(uid);
 		nm.deleteNote(note);
 		note = null;
