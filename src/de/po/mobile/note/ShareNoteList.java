@@ -67,7 +67,9 @@ public class ShareNoteList extends ListActivity {
 			public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
 				if (columnIndex == 4 || columnIndex == 5) {
 					long date = cursor.getLong(columnIndex);
-					String formatedDate = DateFormat.getDateInstance().format(date);
+					String formatedDate = DateFormat.getInstance().format(date);
+					//String formatedDate = DateFormat.getDateInstance().format(date);
+					//formatedDate += DateFormat.getTimeInstance().format(date);
 					((TextView) view).setText(formatedDate);
 					return true;
 				}

@@ -12,15 +12,20 @@
 		android:layout_alignParentTop="true" android:layout_alignParentRight="true"
 		android:singleLine="true" android:ellipsize="marquee" android:text="My Application" />
 
-	<TextView android:id="@+id/secondLine1" android:layout_height="26dip" android:layout_toRightOf="@id/icon"
-		android:layout_alignParentBottom="true"  android:singleLine="true"
-		android:ellipsize="marquee" android:layout_below="@id/firstLine"
-		android:textStyle="italic" android:text="second Line1" android:layout_width="120dip"/>
+	<LinearLayout android:layout_below="@id/firstLine"
+		android:layout_alignParentBottom="true" android:layout_width="fill_parent"
+		android:layout_height="26dip" android:layout_toRightOf="@id/icon">
+		<TextView android:id="@+id/secondLine1" android:singleLine="true"
+			android:ellipsize="marquee" android:textStyle="italic" android:text="second Line1"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_weight=".5"  android:textColor="@android:color/secondary_text_dark" />
 
-	<TextView android:id="@+id/secondLine2" android:layout_width="100dip"
-		android:layout_height="26dip" android:layout_toRightOf="@+id/secondLine1"
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentRight="true" android:singleLine="true"
-		android:ellipsize="marquee" android:layout_below="@id/firstLine"
-		android:textStyle="italic" android:text="second Line2" />
+		<TextView android:id="@+id/secondLine2" android:singleLine="true"
+			android:ellipsize="marquee" android:gravity="right"
+			android:textStyle="italic" android:text="second Line1"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_weight=".5" android:textColor="@android:color/secondary_text_light" />
+	</LinearLayout>
+
+
 </RelativeLayout>

@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ShareNoteEdit extends Activity {
 	private static final String TAG = "ShareNoteEdit";
@@ -19,12 +18,21 @@ public class ShareNoteEdit extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.d(TAG, "onCreate");
 		setContentView(R.layout.edit);
+		note = (Note)getLastNonConfigurationInstance();
 		_processIntent();
 	}
 
 	@Override
+	public Object onRetainNonConfigurationInstance() {
+		//return super.onRetainNonConfigurationInstance();
+		return note;
+	}
+
+	@Override
 	protected void onNewIntent(Intent intent) {
+		Log.d(TAG, "onNewIntent");
 		setIntent(intent);
 		_processIntent();
 		super.onNewIntent(intent);
