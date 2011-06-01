@@ -19,12 +19,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 
 public class ShareNoteList extends ListActivity {
 	private static final String TAG = "ShareNoteListActivity";
 
 	private Cursor result;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,22 +63,25 @@ public class ShareNoteList extends ListActivity {
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(
 				getApplicationContext(), R.layout.list_note_item, result, from,
 				to);
-		
+
 		adapter.setViewBinder(new ViewBinder() {
-			
-			public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+
+			public boolean setViewValue(View view, Cursor cursor,
+					int columnIndex) {
 				if (columnIndex == 4 || columnIndex == 5) {
 					long date = cursor.getLong(columnIndex);
 					String formatedDate = DateFormat.getInstance().format(date);
-					//String formatedDate = DateFormat.getDateInstance().format(date);
-					//formatedDate += DateFormat.getTimeInstance().format(date);
+					// String formatedDate =
+					// DateFormat.getDateInstance().format(date);
+					// formatedDate +=
+					// DateFormat.getTimeInstance().format(date);
 					((TextView) view).setText(formatedDate);
 					return true;
 				}
 				return false;
 			}
 		});
-		
+
 		this.setListAdapter(adapter);
 	}
 
@@ -98,6 +103,9 @@ public class ShareNoteList extends ListActivity {
 		case R.id.deleteNote:
 			deleteNote(info.id);
 			break;
+		case R.id.shareNote:
+			shareNote(info.id);
+			break;
 		default:
 			break;
 		}
@@ -118,11 +126,34 @@ public class ShareNoteList extends ListActivity {
 		intent.putExtra("dbid", id);
 		startActivity(intent);
 	}
-	
+
 	private void deleteNote(long id) {
-		NoteMapper nm = ((ShareNoteApp)getApplication()).getNoteMapper();
+		NoteMapper nm = ((ShareNoteApp) getApplication()).getNoteMapper();
 		Note note = nm.getNote(id);
 		nm.deleteNote(note);
 		result.requery();
+	}
+
+	private void shareNote(long id) {
+		NoteMapper nm = ((ShareNoteApp) getApplication()).getNoteMapper();
+		Note note = nm.getNote(id);
+
+		if (note != null) {
+			Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+			shareIntent.setType("text/plain");
+			shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+					note.getTitle());
+			shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+					note.getContent());
+
+			startActivity(Intent.createChooser(shareIntent,
+					getString(R.string.shareNote)));
+		} else {
+			// toast "save note"
+			Toast toast = Toast.makeText(getApplicationContext(),
+					"Nothing to share", Toast.LENGTH_SHORT);
+			// toast.setText(R.string.noteSaved);
+			toast.show();
+		}
 	}
 }

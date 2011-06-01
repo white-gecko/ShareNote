@@ -20,13 +20,13 @@ public class ShareNoteEdit extends Activity {
 		super.onCreate(savedInstanceState);
 		Log.d(TAG, "onCreate");
 		setContentView(R.layout.edit);
-		note = (Note)getLastNonConfigurationInstance();
+		note = (Note) getLastNonConfigurationInstance();
 		_processIntent();
 	}
 
 	@Override
 	public Object onRetainNonConfigurationInstance() {
-		//return super.onRetainNonConfigurationInstance();
+		// return super.onRetainNonConfigurationInstance();
 		return note;
 	}
 
@@ -40,40 +40,15 @@ public class ShareNoteEdit extends Activity {
 
 	@Override
 	protected void onPause() {
-		EditText text = (EditText) findViewById(R.id.noteText);
-
-		boolean save = false;
-		String textString = text.getText().toString();
-		if (note == null && textString.length() > 0) {
-			note = new Note("");
-			note.setContent(textString);
-			save = true;
-		} else if (note != null && !textString.equals(note.getContent())) {
-			note.setContent(textString);
-			save = true;
-		}
-
-		if (note != null && save) {
-			NoteMapper nm = ((ShareNoteApp) getApplication()).getNoteMapper();
-			nm.saveNote(note);
-			Toast toast = Toast.makeText(getApplicationContext(), "saved",
-					Toast.LENGTH_SHORT);
-			// toast.setText(R.string.noteSaved);
-			toast.show();
-			Log.v(TAG, "Note saved");
-		} else {
-			Log.v(TAG, "Don't need to save the note");
-		}
-
-		// toast "save note"
+		saveNote();
 		super.onPause();
 	}
 
 	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.note_context, menu);
-		return super.onPrepareOptionsMenu(menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -81,6 +56,9 @@ public class ShareNoteEdit extends Activity {
 		switch (item.getItemId()) {
 		case R.id.deleteNote:
 			deleteNote(note.getId());
+			break;
+		case R.id.shareNote:
+			shareNote();
 			break;
 		default:
 			break;
@@ -137,5 +115,57 @@ public class ShareNoteEdit extends Activity {
 		nm.deleteNote(note);
 		note = null;
 		finish();
+	}
+
+	private void shareNote() {
+		saveNote();
+
+		if (note != null) {
+			Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+			shareIntent.setType("text/plain");
+			shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+					note.getTitle());
+			shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+					note.getContent());
+
+			startActivity(Intent.createChooser(shareIntent,
+					getString(R.string.shareNote)));
+		} else {
+			// toast "save note"
+			Toast toast = Toast.makeText(getApplicationContext(),
+					"Nothing to share", Toast.LENGTH_SHORT);
+			// toast.setText(R.string.noteSaved);
+			toast.show();
+		}
+	}
+
+	public void saveNote() {
+
+		EditText text = (EditText) findViewById(R.id.noteText);
+
+		boolean save = false;
+		String textString = text.getText().toString();
+		if (note == null && textString.length() > 0) {
+			note = new Note("");
+			note.setContent(textString);
+			save = true;
+		} else if (note != null && !textString.equals(note.getContent())) {
+			note.setContent(textString);
+			save = true;
+		}
+
+		if (note != null && save) {
+			NoteMapper nm = ((ShareNoteApp) getApplication()).getNoteMapper();
+			nm.saveNote(note);
+
+			// toast "save note"
+			Toast toast = Toast.makeText(getApplicationContext(), "Saved",
+					Toast.LENGTH_SHORT);
+			// toast.setText(R.string.noteSaved);
+			toast.show();
+			Log.v(TAG, "Note saved");
+		} else {
+			Log.v(TAG, "Don't need to save the note");
+		}
 	}
 }
