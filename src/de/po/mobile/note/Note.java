@@ -16,6 +16,7 @@ public class Note {
 	private String content;
 	private Date creation;
 	private Date modification;
+	private boolean deleted = false;
 
 	public Note(String contentIn) {
 		this.content = contentIn;
@@ -82,6 +83,14 @@ public class Note {
 
 	public Date getCreation() {
 		return creation;
+	}
+	
+	public void delete() {
+		this.deleted = true;
+	}
+	
+	public void restore() {
+		this.deleted = false;
 	}
 
 	/**

@@ -55,7 +55,13 @@ public class ShareNoteEdit extends Activity {
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.deleteNote:
-			deleteNote(note.getId());
+			saveNote();
+			if (note != null) {
+				deleteNote(note.getId());
+			} else {
+				Log.d(TAG, "no note set");
+				finish();
+			}
 			break;
 		case R.id.shareNote:
 			shareNote();
