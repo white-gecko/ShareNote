@@ -44,10 +44,19 @@ public class Note {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @return The content of this Note including the title (same as getContent(false))
+	 */
 	public String getContent() {
 		return getContent(true);
 	}
 
+	/**
+	 * 
+	 * @param withTitle, defaults to false
+	 * @return The content of this Note
+	 */
 	public String getContent(boolean withTitle) {
 		if (withTitle) {
 			return content;
