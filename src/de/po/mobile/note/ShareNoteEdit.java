@@ -55,13 +55,7 @@ public class ShareNoteEdit extends Activity {
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.deleteNote:
-			saveNote();
-			if (note != null) {
-				deleteNote(note.getId());
-			} else {
-				Log.d(TAG, "no note set");
-				finish();
-			}
+			deleteNote();
 			break;
 		case R.id.shareNote:
 			shareNote();
@@ -115,11 +109,24 @@ public class ShareNoteEdit extends Activity {
 
 	}
 
-	private void deleteNote(String uid) {
-		NoteMapper nm = ((ShareNoteApp) getApplication()).getNoteMapper();
-		Note note = nm.getNote(uid);
-		nm.deleteNote(note);
-		note = null;
+	private void deleteNote() {
+		saveNote();
+		// NoteMapper nm = ((ShareNoteApp) getApplication()).getNoteMapper();
+		// Note note = nm.getNote(uid);
+		if (note != null) {
+			note.delete();
+			NoteMapper nm = ((ShareNoteApp) getApplication()).getNoteMapper();
+			nm.saveNote(note);
+
+			// toast "save note"
+			Toast toast = Toast.makeText(getApplicationContext(), "Deleted",
+					Toast.LENGTH_SHORT);
+			// toast.setText(R.string.noteSaved);
+			toast.show();
+			Log.v(TAG, "Note deleted");
+		}
+		// nm.deleteNote(note);
+		// note = null;
 		finish();
 	}
 

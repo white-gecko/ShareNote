@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hallo Welt, ShareNote!</string>
+    <string name="app_name">ShareNote</string>
+    <string name="newNote">Neue Notiz</string>
+    <string name="noteSaved">Notiz gespeichert</string>
+    <string name="saveNote">Notiz speichern</string>
+    <string name="deleteNote">Notiz löschen</string>
+    <string name="showNote">Notiz anzeigen</string>
+    <string name="resetNote">Notiz zurücksetzen</string>
+    <string name="shareNote">Notiz weitergeben ...</string>
+</resources>

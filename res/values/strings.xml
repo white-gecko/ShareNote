@@ -3,7 +3,7 @@
     <string name="hello">Hello World, ShareNote!</string>
     <string name="app_name">ShareNote</string>
     <string name="newNote">New Note</string>
-    <string name="noteSaved">The Note was saved.</string>
+    <string name="noteSaved">Saved Note</string>
     <string name="saveNote">Save Note</string>
     <string name="deleteNote">Delete Note</string>
     <string name="showNote">Show Note</string>

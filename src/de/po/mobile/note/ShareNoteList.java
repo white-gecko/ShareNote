@@ -54,7 +54,9 @@ public class ShareNoteList extends ListActivity {
 		SQLiteDatabase db = openHelper.getReadableDatabase();
 		String table = NoteOpenHelper.NOTES_TABLE;
 		String[] columns = NoteOpenHelper.NOTES_TABLE_LAYOUT;
-		result = db.query(table, columns, null, null, null, null,
+		String selection = NoteOpenHelper.NOTES_TABLE_LAYOUT[6] + "=?"; // NOTES_TABLE_LAYOUT[6] should be 'deleted'
+		String[] selectionArgs = {"0"};
+		result = db.query(table, columns, selection, selectionArgs, null, null,
 				"modification DESC");
 
 		// Cursor result = nm.getCursor();
@@ -130,7 +132,19 @@ public class ShareNoteList extends ListActivity {
 	private void deleteNote(long id) {
 		NoteMapper nm = ((ShareNoteApp) getApplication()).getNoteMapper();
 		Note note = nm.getNote(id);
-		nm.deleteNote(note);
+		
+		if (note != null) {
+			note.delete();
+			nm.saveNote(note);
+			// nm.deleteNote(note);
+			
+			// toast "save note"
+			Toast toast = Toast.makeText(getApplicationContext(), "Deleted",
+					Toast.LENGTH_SHORT);
+			// toast.setText(R.string.noteSaved);
+			toast.show();
+			Log.v(TAG, "Note deleted");
+		}
 		result.requery();
 	}
 

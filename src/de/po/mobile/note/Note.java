@@ -92,6 +92,10 @@ public class Note {
 	public void restore() {
 		this.deleted = false;
 	}
+	
+	public boolean getDeleted() {
+		return this.deleted;
+	}
 
 	/**
 	 * todo check if this id already exists in this system

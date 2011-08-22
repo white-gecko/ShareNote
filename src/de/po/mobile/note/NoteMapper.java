@@ -104,6 +104,7 @@ public class NoteMapper {
 		values.put("content", note.getContent(false));
 		values.put("creation", note.getCreation().getTime());
 		values.put("modification", note.getModification().getTime());
+		values.put("deleted", note.getDeleted());
 
 		long dbId = _getDbId(note.getId());
 
@@ -126,22 +127,6 @@ public class NoteMapper {
 		 * "Successfully updated the cursor."); } else { Log.v(TAG,
 		 * "Problem with updating the cursor."); }
 		 */
-	}
-
-	/**
-	 * @deprecated
-	 * @param note
-	 */
-	public void deleteNote(Note note) {
-		// in future we should just set a property in the note to deleted and
-		// mark the note as deleted when it is saved
-		notes.remove(note.getId());
-		SQLiteDatabase db = openHelper.getWritableDatabase();
-		String table = NoteOpenHelper.NOTES_TABLE;
-		String where = "uid = ?";
-		String[] whereArgs = { note.getId() };
-		db.delete(table, where, whereArgs);
-		db.close();
 	}
 
 	private String _getUid(long id) {
