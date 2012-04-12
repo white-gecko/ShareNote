@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -121,6 +122,35 @@ public class ShareNoteList extends ListActivity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.note_list_context, menu);
 		inflater.inflate(R.menu.note_context, menu);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.note_list_options, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.exportNotes:
+			exportNotes();
+			break;
+		default:
+			break;
+		}
+		return super.onMenuItemSelected(featureId, item);
+	}
+
+
+	private void exportNotes() {
+		NoteOpenHelper openHelper = new NoteOpenHelper(getApplicationContext());
+		SQLiteDatabase db = openHelper.getReadableDatabase();
+		
+		DatabaseAssistant dbAssi = new DatabaseAssistant(getApplicationContext(), db, "/sdcard/export.xml");
+		dbAssi.exportData();
+		
 	}
 
 	private void showNote(long id) {
