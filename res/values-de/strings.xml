@@ -8,5 +8,5 @@
     <string name="deleteNote">Notiz löschen</string>
     <string name="showNote">Notiz anzeigen</string>
     <string name="resetNote">Notiz zurücksetzen</string>
-    <string name="shareNote">Notiz weitergeben ...</string>
+    <string name="shareNote">Notiz weitergeben …</string>
 </resources>

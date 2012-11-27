@@ -8,5 +8,6 @@
     <string name="deleteNote">Delete Note</string>
     <string name="showNote">Show Note</string>
     <string name="resetNote">Reset Note</string>
-    <string name="shareNote">Share Note ...</string>
+    <string name="shareNote">Share Note …</string>
+    <string name="editText">EditText</string>
 </resources>
