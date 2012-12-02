@@ -1,6 +1,8 @@
 ShareNote
 =========
 
+In the [Play Store](https://play.google.com/store/apps/details?id=de.po.mobile.note) and the [BlackBerry App World](http://appworld.blackberry.com/webstore/content/84790/)
+
 Warranty / License
 ------------------
 
