@@ -3,6 +3,7 @@ package de.po.mobile.note;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ public class ShareNoteEdit extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.d(TAG, "onCreate");
+		// getActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.edit);
 		note = (Note) getLastNonConfigurationInstance();
 		_processIntent();
@@ -48,7 +50,9 @@ public class ShareNoteEdit extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.note_context, menu);
-		return super.onCreateOptionsMenu(menu);
+		MenuCompat.setShowAsAction(menu.findItem(R.id.deleteNote), 1);
+		MenuCompat.setShowAsAction(menu.findItem(R.id.shareNote), 1);
+		return true;
 	}
 
 	@Override
