@@ -10,4 +10,5 @@
     <string name="resetNote">Reset Note</string>
     <string name="shareNote">Share Note …</string>
     <string name="editText">EditText</string>
+    <string name="textIcon">text icon</string>
 </resources>
