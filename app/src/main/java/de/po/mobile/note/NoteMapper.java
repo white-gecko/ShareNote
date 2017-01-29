@@ -15,7 +15,6 @@ public class NoteMapper {
 
 	private HashMap<String, Note> notes;
 	private NoteOpenHelper openHelper;
-	private Cursor cursor = null;
 
 	public NoteMapper(Context context) {
 		openHelper = new NoteOpenHelper(context);
@@ -23,13 +22,11 @@ public class NoteMapper {
 	}
 
 	public Cursor getCursor() {
-		if (cursor == null) {
-			SQLiteDatabase db = openHelper.getReadableDatabase();
-			String table = NoteOpenHelper.NOTES_TABLE;
-			String[] columns = NoteOpenHelper.NOTES_TABLE_LAYOUT;
-			cursor = db.query(table, columns, null, null, null, null,
-					"modification");
-		}
+		SQLiteDatabase db = openHelper.getReadableDatabase();
+		String table = NoteOpenHelper.NOTES_TABLE;
+		String[] columns = NoteOpenHelper.NOTES_TABLE_LAYOUT;
+		Cursor cursor = db.query(table, columns, null, null, null, null,
+				"modification");
 		return cursor;
 	}
 

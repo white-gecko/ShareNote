@@ -10,4 +10,5 @@
     <string name="resetNote">Notiz zurücksetzen</string>
     <string name="shareNote">Notiz weitergeben …</string>
     <string name="textIcon">Icon für Text</string>
+    <string name="exportNotes">Notizen exportieren</string>
 </resources>
