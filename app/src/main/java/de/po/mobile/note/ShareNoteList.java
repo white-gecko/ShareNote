@@ -148,7 +148,7 @@ public class ShareNoteList extends ListActivity {
 		NoteOpenHelper openHelper = new NoteOpenHelper(getApplicationContext());
 		SQLiteDatabase db = openHelper.getReadableDatabase();
 		
-		DatabaseAssistant dbAssi = new DatabaseAssistant(getApplicationContext(), db, "/sdcard/export.xml");
+		DatabaseAssistant dbAssi = new DatabaseAssistant(getApplicationContext(), db, "/sdcard/sharenote-export.xml");
 		dbAssi.exportData();
 		
 	}
