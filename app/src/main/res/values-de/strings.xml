@@ -9,5 +9,7 @@
     <string name="showNote">Notiz anzeigen</string>
     <string name="resetNote">Notiz zurücksetzen</string>
     <string name="shareNote">Notiz weitergeben …</string>
+    <string name="editText">Text bearbeiten</string>
     <string name="textIcon">Icon für Text</string>
+    <string name="exportNotes">Notizen auf SD exportieren</string>
 </resources>

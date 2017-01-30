@@ -9,7 +9,7 @@
     <string name="showNote">Show Note</string>
     <string name="resetNote">Reset Note</string>
     <string name="shareNote">Share Note …</string>
-    <string name="editText">EditText</string>
+    <string name="editText">Edit Text</string>
     <string name="textIcon">text icon</string>
     <string name="exportNotes">Export all Notes to SD</string>
 </resources>
