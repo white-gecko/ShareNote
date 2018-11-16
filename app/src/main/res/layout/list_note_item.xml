@@ -10,6 +10,7 @@
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
+        android:layout_marginEnd="6dip"
         android:layout_marginRight="6dip"
         android:src="@drawable/text"
         android:contentDescription="@string/textIcon" />
@@ -18,11 +19,14 @@
         android:id="@+id/firstLine"
         android:layout_width="fill_parent"
         android:layout_height="26dip"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/icon"
         android:layout_toRightOf="@id/icon"
         android:ellipsize="marquee"
         android:singleLine="true"
+        android:textColor="@android:color/primary_text_dark"
         android:text="My Application" />
 
     <LinearLayout
@@ -30,7 +34,8 @@
         android:layout_height="26dip"
         android:layout_alignParentBottom="true"
         android:layout_below="@id/firstLine"
-        android:layout_toRightOf="@id/icon" >
+        android:layout_toRightOf="@id/icon"
+        android:layout_toEndOf="@id/icon" >
 
         <TextView
             android:id="@+id/secondLine1"
@@ -49,10 +54,10 @@
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:ellipsize="marquee"
-            android:gravity="right"
+            android:gravity="end"
             android:singleLine="true"
-            android:text="second Line1"
-            android:textColor="@android:color/secondary_text_light"
+            android:text="second Line2"
+            android:textColor="@android:color/secondary_text_dark"
             android:textStyle="italic" />
     </LinearLayout>
 
